@@ -20,7 +20,7 @@ export default class Posts extends Component {
         }
     }
     componentDidMount() {
-        const sabArr = getDocs(database.posts).then((res) => {
+        getDocs(database.posts).then((res) => {
             this.setState({ posts: res.docs })
         }).catch((err) => {
             console.log(err);

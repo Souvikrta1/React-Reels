@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { updateDoc, doc } from 'firebase/firestore';
-import { database, fstore } from './Firebase';
+import { fstore } from './Firebase';
 
 export default class Like extends Component {
     constructor(props) {

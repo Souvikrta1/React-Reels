@@ -1,0 +1,30 @@
+.signup-form{
+    width: 360px;
+    height: 450px;
+    padding: 1%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.to-login{
+    color: #1976d2;
+    text-align: center;
+    font-size: medium;
+    font-weight: 500;
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.pro-pic-select{
+    width: 100%;
+    border: 1px solid rgb(156, 153, 153);
+    border-radius: 5px;
+    margin-bottom: 2%;
+}

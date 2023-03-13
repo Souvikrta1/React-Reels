@@ -24,6 +24,13 @@ export default class Login extends Component {
         }
     }
 
+    componentDidMount(){
+        let data = localStorage.getItem("users");
+        if(data){
+            window.location.href = "/"
+        }
+    }
+
     handleLogin = () => {
         this.props.login(this.state.email, this.state.password);
     }

@@ -8,7 +8,8 @@ export default class PrivateRoute extends Component {
             user: user ? user : []
         }
     }
-
+    
+    // if the user not logged in redirect him to login page
     render() {
         if(Object.keys(this.state.user).length === 0){
             return window.location.href = "/login"

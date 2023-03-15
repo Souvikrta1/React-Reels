@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import ReactDOM from 'react-dom';
 import { database } from './Firebase'
 import { getDocs } from 'firebase/firestore'
@@ -7,8 +7,6 @@ import Like from './Like';
 import { BiComment } from 'react-icons/bi';
 import { Card } from '@mui/material';
 import Comment from './Comment';
-import { display } from '@mui/system';
-
 
 export default class Posts extends Component {
     constructor() {
@@ -18,6 +16,7 @@ export default class Posts extends Component {
             user: {},
             isShowComment: false,
         }
+        this.myRef = createRef();
     }
     componentDidMount() {
         getDocs(database.posts).then((res) => {
@@ -29,6 +28,7 @@ export default class Posts extends Component {
         const tempUser = JSON.parse(localStorage.getItem("users"));
         this.setState({ user: tempUser });
     }
+    // setting a scroll feature after video finished
     handleScroll = (e) => {
         let next = ReactDOM.findDOMNode(e.target).parentNode.parentNode.nextSibling;
         if (next) {
@@ -39,13 +39,19 @@ export default class Posts extends Component {
         }
     }
 
+    handleCmntClick = (item) =>{
+        this.setState({ isShowComment: item.id })
+        this.myRef.current.style.overflow = 'hidden'
+    }
+
     handleCloseCmnt = () =>{
-        this.setState({isShowComment:false})
+        this.setState({isShowComment:false});
+        this.myRef.current.style.overflow = 'scroll'
     }
 
     render() {
         return (
-            <div className='reels-container'>
+            <div className='reels-container' ref={this.myRef}>
                 {
                     this.state.posts.map((item) => {
                         const data = item.data();
@@ -55,11 +61,11 @@ export default class Posts extends Component {
                                     <video src={data.uUrl} controls id={data.pId} className="single-post" onEnded={this.handleScroll}>
                                     </video>
                                     <Like userData={this.state.user} postData={data} id={item.id} />
-                                    <BiComment size="30px" className='comment-icon' color='red' onClick={() => {this.setState({ isShowComment: item.id }); this.setState({display:true})}} />
+                                    <BiComment size="30px" className='comment-icon' color='red' onClick={()=>this.handleCmntClick(item)} />
                                     <h3>{data.uName}</h3>
                                 </div>
                                 {
-                                    this.state.isShowComment === item.id && display && <Card className="commentModal" >
+                                    this.state.isShowComment === item.id  && <Card className="commentModal" >
                                         <Comment postData={data} id={item.id} userData={this.state.user} display={this.handleCloseCmnt}/>
                                     </Card>
                                 }

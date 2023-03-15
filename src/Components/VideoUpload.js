@@ -46,7 +46,7 @@ export default class VideoUpload extends Component {
         }
         const f3 = () => {
             // Complete
-
+            // getting download url and 
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 console.log('File available at', downloadURL);
                 let obj = {
@@ -71,6 +71,7 @@ export default class VideoUpload extends Component {
                 console.log(err);
             })
         }
+        
         uploadTask.on("state_changed", f1, f2, f3);
         function f1(snapshot) {
             // Progress
@@ -81,6 +82,7 @@ export default class VideoUpload extends Component {
         console.log(uploadTask);
         console.log("Function triggered");
     };
+
     render() {
         return (
             <div>

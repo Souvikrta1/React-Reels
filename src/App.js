@@ -15,6 +15,7 @@ import { storage } from "./Components/Firebase"
 
 export default class App extends Component {
 
+    //sign up 
     handleSignUp = (email, password, file, name) => {
         createUserWithEmailAndPassword(getAuth(AppFire), email, password)
             .then((res) => {
@@ -32,7 +33,7 @@ export default class App extends Component {
                     console.log(error);
                 };
                 const f3 = () => {
-                    // Complete upload
+                    // Complete upload & then getting download url
                     getDownloadURL(uploadTask.snapshot.ref)
                         .then((downloadURL) => {
                             console.log(downloadURL);
@@ -43,6 +44,7 @@ export default class App extends Component {
                                 profileUrl: downloadURL,
                                 createAt: new Date(),
                             };
+                            
                             addDoc(database.users, obj)
                                 .then((refernce) => {
                                     console.log("User updated successfully");
@@ -63,6 +65,7 @@ export default class App extends Component {
             })
     }
 
+    //signin with email and password
     handleLogin = (email, password) => {
         signInWithEmailAndPassword(getAuth(AppFire), email, password)
             .then((res) => {
@@ -83,6 +86,7 @@ export default class App extends Component {
             })
     }
 
+    //sign out 
     handleSignOut = () => {
         signOut(getAuth()).then((res) => {
             window.location.href = "/login";
@@ -92,6 +96,7 @@ export default class App extends Component {
         })
     }
 
+    //Google login with popup
     googleLogin = () => {
         const auth = getAuth(AppFire);
         const provider = new GoogleAuthProvider();

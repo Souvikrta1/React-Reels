@@ -27,6 +27,7 @@ export default class Profile extends Component {
                 console.log(err);
             });
     }
+    // viewing userdata & uploaded reels
     render() {
         return (
             <div className="profile">

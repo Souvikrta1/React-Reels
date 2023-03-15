@@ -11,6 +11,8 @@ export default class Like extends Component {
             likeCount : this.props.postData.likes.length
         }
     }
+
+    //updating the like on reels
     handleLike = () => {
         if (this.state.like === true) {
             let tempArr = this.props.postData.likes.filter((el) => el !== this.props.userData.userId);
